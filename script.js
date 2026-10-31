@@ -13,34 +13,31 @@ async function getArt() {
         const json = await response.json()
         console.log(json)
 
-        const movieHolder = document.getElementById("movieHolder");
-        movieHolder.textContent = ""
+        const artHolder = document.getElementById("artHolder");
+        artHolder.textContent = ""
         const config = json.config
-        for (const artwork  of json.data) {
-            //  Create a div to hold each image and title 
-            //  Give the div the css class of CARD
-            const wrapper = document.createElement("div")
-            wrapper.classList.add("card")
+        for (const artwork of json.data) {
+            if (!artwork.image_id) continue;
+            const divContainer = document.createElement("div")
+            divContainer.classList.add("card")  
 
-            // Create an image element
-            //      point it to the image from this movie            
             const image = document.createElement("img")
-            
             image.src = config.iiif_url + "/" + artwork.image_id + "/full/843,/0/default.jpg";
-            image.width = "500"
+            // image.width = "300"
 
 
-            // Create a CONTAINER div to hold the title and year.
-            // Give the CONTAINER div the style of container
-            const container = document.createElement("div")
-            container.textContent = json.title
-            container.classList.add("container")
-            // Add the CONTAINER to the CARD
-            wrapper.append(container)
 
-            // Add all the elements to the movieHolder element
-            movieHolder.append(image)
-            movieHolder.append(wrapper)
+            const card = document.createElement("div")
+            card.classList.add("container")
+            const titleHeader = document.createElement("h3")
+            titleHeader.textContent = artwork.title
+
+            card.appendChild(titleHeader)
+
+            divContainer.appendChild(image);
+            divContainer.appendChild(card)
+
+            artHolder.appendChild(divContainer)
         }
 
 
