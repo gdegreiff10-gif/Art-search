@@ -1,6 +1,37 @@
 import requests, json
 from PIL import Image
+import time
 
-response = requests.get('https://api.artic.edu/api/v1/artworks')
-data = response.json()
-print(json.dumps(data, indent = 2))
+headers = {
+    "User-Agent": "ArtSearch class project (gustavo.d29@k12.xrds.org)",
+    "AIC-User-Agent": "ArtSearch class project (gustavo.d29@k12.xrds.org)",
+}
+
+
+
+page_counter = 1
+while True:
+    response = requests.get(
+    'https://api.artic.edu/api/v1/artworks?&limit=100&fields=id,title,artist_title,artwork_type_title,image_id&page=' + str(page_counter),
+    headers=headers
+    )
+    
+    print(response.status_code)
+    if response.ok:
+        wrapper = response.json()
+        wrapper_2 = wrapper["pagination"]
+        for art in wrapper["data"]:
+            if art["artwork_type_title"] == "Painting":
+                print(json.dumps(art, indent=2))
+    else:
+        print(response.text[:500])
+    if wrapper_2["current_page"] >= wrapper_2["total_pages"]:
+        break
+    page_counter += 1
+    time.sleep(1)
+
+
+
+
+
+
