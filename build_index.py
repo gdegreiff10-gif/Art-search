@@ -8,7 +8,7 @@ headers = {
 }
 
 
-
+holder = []
 page_counter = 1
 while True:
     response = requests.get(
@@ -21,15 +21,17 @@ while True:
         wrapper = response.json()
         wrapper_2 = wrapper["pagination"]
         for art in wrapper["data"]:
-            if art["artwork_type_title"] == "Painting":
-                print(json.dumps(art, indent=2))
+            if art["artwork_type_title"] == "Painting" and art["image_id"] != None:
+                holder.append(art)
     else:
         print(response.text[:500])
+        break
     if wrapper_2["current_page"] >= wrapper_2["total_pages"]:
         break
     page_counter += 1
     time.sleep(1)
-
+with open("metadata.json", "w", encoding="utf-8",) as file:
+    json.dump(holder, file)
 
 
 
