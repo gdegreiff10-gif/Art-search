@@ -30,7 +30,8 @@ for art in metadata:
             image = Image.open(image_stream).convert("RGB")
             inputs = processor(images=image, return_tensors="pt")
             with torch.no_grad():
-                features = model.get_image_features(**inputs)
+                vision_out = model.vision_model(**inputs)
+                features = model.visual_projection(vision_out.pooler_output)
             features = features/features.norm(dim=-1, keepdim=True)
             features = features.numpy()
             vectors.append(features[0])
