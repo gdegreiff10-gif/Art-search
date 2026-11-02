@@ -32,8 +32,4 @@ while True:
     time.sleep(1)
 with open("metadata.json", "w", encoding="utf-8",) as file:
     json.dump(holder, file)
-
-
-
-
-
+    

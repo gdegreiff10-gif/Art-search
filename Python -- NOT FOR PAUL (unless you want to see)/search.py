@@ -37,6 +37,4 @@ for i in best_match:
     print(metadata[i]["title"])
     print(metadata[i]["artist_title"])
     print(dot_product[i])
-
-
-
+    
