@@ -12,8 +12,8 @@ model = CLIPModel.from_pretrained(model_id)
 processor = CLIPProcessor.from_pretrained(model_id)
 
 headers = {
-    "User-Agent": "ArtSearch class project (gustavo.d29@k12.xrds.org)",
-    "AIC-User-Agent": "ArtSearch class project (gustavo.d29@k12.xrds.org)",
+    "User-Agent": "ArtSearch class project (example@gmail.com))",
+    "AIC-User-Agent": "ArtSearch class project (example@gmail.com))",
 }
 
 with open("metadata.json", "r") as file:

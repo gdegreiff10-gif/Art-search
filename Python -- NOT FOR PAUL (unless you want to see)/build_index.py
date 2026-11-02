@@ -3,8 +3,8 @@ from PIL import Image
 import time
 
 headers = {
-    "User-Agent": "ArtSearch class project (gustavo.d29@k12.xrds.org)",
-    "AIC-User-Agent": "ArtSearch class project (gustavo.d29@k12.xrds.org)",
+    "User-Agent": "ArtSearch class project (example@gmail.com)",
+    "AIC-User-Agent": "ArtSearch class project (example@gmail.com))",
 }
 
 
